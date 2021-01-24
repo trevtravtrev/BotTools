@@ -1,8 +1,9 @@
+# toggles for features you want to run
 vnc = True
 amazon = True
 
 # list of pi names to open. MUST exact match dictionary keys in vnc_accounts.linked_pis
-pis_to_open = ['pluggrr', 'pi 5', 'pi 6', 'pi 7']
+pis_to_open = ['pi 6']
 
 # vnc accounts (list of dictionaries)
 # username = vnc account username (string)
