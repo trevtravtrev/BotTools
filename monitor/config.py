@@ -13,20 +13,20 @@ pis_to_open = ['pluggrr', 'pi 5', 'pi 6', 'pi 7']
 vnc_accounts = [{'username': 'user1',
                  'password': 'pass1',
                  'linked_pis': {
-                     'Gaming PC': r'assets\gamingpc.png',
-                     'pi 4': r'assets\pi4.png',
-                     'pi 5': r'assets\pi5.png',
-                     'pi 6': r'assets\pi6.png',
-                     'pi 7': r'assets\pi7.png'
+                     'Gaming PC': r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\gamingpc.png',
+                     'pi 4': r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\pi4.png',
+                     'pi 5': r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\pi5.png',
+                     'pi 6': r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\pi6.png',
+                     'pi 7': r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\pi7.png'
                  }
                  },
                 {'username': 'user2',
                  'password': 'pass2',
                  'linked_pis': {
-                     'deallrr': r'assets\deallrr.png',
-                     'pi 1': r'assets\pi1.png',
-                     'pi 2': r'assets\pi2.png',
-                     'pi 3': r'assets\pi3.png',
-                     'pluggrr': r'assets\pluggrr.png'
+                     'deallrr': r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\deallrr.png',
+                     'pi 1': r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\pi1.png',
+                     'pi 2': r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\pi2.png',
+                     'pi 3': r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\pi3.png',
+                     'pluggrr': r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\pluggrr.png'
                  }
                  }]

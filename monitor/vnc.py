@@ -17,7 +17,7 @@ class Account:
         self._get_pis_to_open()
 
     def sign_in(self):
-        utils.click_button(r'assets\signin.png')
+        utils.click_button(r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\signin.png')
         pyautogui.write(self.username)
         pyautogui.press('tab')
         pyautogui.write(self.password)
@@ -49,7 +49,7 @@ def close_vnc():
 
 
 def authentication_status():
-    signed_out = pyautogui.locateOnScreen(r'assets\signin.png')
+    signed_out = pyautogui.locateOnScreen(r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\signin.png')
     if signed_out:
         print("VNC is signed out.")
         return False
@@ -59,8 +59,8 @@ def authentication_status():
 
 
 def sign_out():
-    utils.click_button(r'assets\checkmark.png', delay=.5)
-    utils.click_button(r'assets\signout.png')
+    utils.click_button(r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\checkmark.png', delay=.5)
+    utils.click_button(r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\signout.png')
     pyautogui.press('enter')
     print("Signed out of VNC.")
 
