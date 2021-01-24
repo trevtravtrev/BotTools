@@ -1,4 +1,5 @@
 import vnc
+import amazon
 import config
 
 
@@ -19,6 +20,18 @@ def main():
                 vnc.sign_out()
         # close main vnc window
         vnc.close_vnc()
+
+    if config.amazon:
+        # open today's amazon commission earnings
+        amazon.open_website('https://affiliate-program.amazon.com/home/reports?ac-ms-src=summaryforthismonth', delay=10)
+        amazon.view_commissions()
+        # open today's amazon bounty earnings
+        amazon.open_website('https://affiliate-program.amazon.com/home/reports?ac-ms-src=summaryforthismonth', delay=10)
+        amazon.view_bounties()
+        # open yesterday's amazon consolidated earnings
+        amazon.open_website('https://affiliate-program.amazon.com/p/reports/global')
+
+    print("Successfully completed all tasks.")
 
 
 if __name__ == '__main__':
