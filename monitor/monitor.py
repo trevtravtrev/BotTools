@@ -22,14 +22,16 @@ def main():
         vnc.close_vnc()
 
     if config.amazon:
-        # open today's amazon commission earnings
-        amazon.open_website('https://affiliate-program.amazon.com/home/reports?ac-ms-src=summaryforthismonth', delay=10)
+        # open today's amazon commission earnings (authenticates if not signed in)
+        amazon.open_amazon_affiliate_webpage(
+            'https://affiliate-program.amazon.com/home/reports?ac-ms-src=summaryforthismonth', delay=10)
         amazon.view_commissions()
-        # open today's amazon bounty earnings
-        amazon.open_website('https://affiliate-program.amazon.com/home/reports?ac-ms-src=summaryforthismonth', delay=10)
+        # open today's amazon bounty earnings (authenticates if not signed in)
+        amazon.open_amazon_affiliate_webpage(
+            'https://affiliate-program.amazon.com/home/reports?ac-ms-src=summaryforthismonth', delay=10)
         amazon.view_bounties()
-        # open yesterday's amazon consolidated earnings
-        amazon.open_website('https://affiliate-program.amazon.com/p/reports/global')
+        # open yesterday's amazon consolidated earnings (authenticates if not signed in)
+        amazon.open_amazon_affiliate_webpage('https://affiliate-program.amazon.com/p/reports/global', delay=0)
 
     print("Successfully completed all tasks.")
 

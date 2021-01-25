@@ -2,15 +2,20 @@
 vnc = True
 amazon = True
 
+# amazon affiliate password (assumes website already has cookie stored for your username, manually sign in once if not)
+amazon_password = "pass"
+
 # list of pi names to open. MUST exact match dictionary keys in vnc_accounts.linked_pis
 pis_to_open = ['pi 6']
 
-# vnc accounts (list of dictionaries)
-# username = vnc account username (string)
-# password = vnc account password (string)
-# linked_pis = {pi_name: image_filepath} (dictionary of strings)
-    # pi_name: name of pi in vnc server
-    # image_filepath: filepath for .png image of pi name as it appears in vnc viewer (for use with pyautogui)
+"""
+vnc_accounts (list of dictionaries)
+ - username = vnc account username (string)
+ - password = vnc account password (string)
+ - linked_pis = {pi_name: image_filepath} (dictionary of strings)
+        - pi_name: name of pi in vnc server
+        - image_filepath: filepath for .png image of pi name as it appears in vnc viewer (for use with pyautogui)
+"""
 vnc_accounts = [{'username': 'user1',
                  'password': 'pass1',
                  'linked_pis': {
