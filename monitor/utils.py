@@ -11,13 +11,19 @@ def click_button(button_image, delay=1, confidence=.6, double_click=False):
     :param double_click: bool to enable double click
     :return: n/a
     """
-    location = pyautogui.locateCenterOnScreen(button_image, confidence=confidence)
-    if location:
-        pyautogui.moveTo(location)
-        if double_click:
-            pyautogui.click(clicks=2)
+    try:
+        location = pyautogui.locateCenterOnScreen(button_image, confidence=confidence)
+        if location:
+            pyautogui.moveTo(location)
+            if double_click:
+                pyautogui.click(clicks=2)
+            else:
+                pyautogui.click()
+            sleep(delay)
         else:
-            pyautogui.click()
-        sleep(delay)
-    else:
-        raise Exception(f'{button_image} image not found on screen.')
+            raise Exception(f'{button_image} image not found on screen.')
+
+    except Exception as e:
+        print(f"Error: {e}. Trying again...")
+        sleep(1)
+        click_button(button_image, delay, confidence, double_click)
