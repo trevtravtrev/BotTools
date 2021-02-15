@@ -17,19 +17,23 @@ class Account:
         self._get_pis_to_open()
 
     def sign_in(self):
-        utils.click_button(r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\signin.png')
-        pyautogui.write(self.username)
-        pyautogui.press('tab')
-        pyautogui.write(self.password)
-        pyautogui.press('enter')
-        print(f'Signed into {self.username}')
-        sleep(7)
+        while True:
+            signin_clicked = utils.click_button(r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\signin.png', confidence=.6)
+            if signin_clicked:
+                pyautogui.write(self.username)
+                pyautogui.press('tab')
+                pyautogui.write(self.password)
+                pyautogui.press('enter')
+                print(f'Signed into {self.username}')
+                return True
 
     def open_pis(self):
         for pi in self.pis_to_open:
-            utils.click_button(self.linked_pis.get(pi), delay=5.5, confidence=.95, double_click=True)
+            pi_opened = False
+            while not pi_opened:
+                open_vnc()
+                pi_opened = utils.click_button(self.linked_pis.get(pi), confidence=.95, clicks=2, open_vnc=True, loop=False)
             print(f'{pi} opened.')
-            open_vnc()
 
     def _get_pis_to_open(self):
         for pi in config.pis_to_open:
@@ -37,13 +41,14 @@ class Account:
                 self.pis_to_open.append(pi)
 
 
-def open_vnc(delay=1):
+def open_vnc(delay=0):
     subprocess.Popen('vncviewer.exe', shell=True, cwd='C:\Program Files\RealVNC\VNC Viewer')
     sleep(delay)
 
 
 def close_vnc():
     open_vnc()
+    sleep(.2)
     pyautogui.hotkey('alt', 'f4')
     print('VNC closed.')
 
@@ -59,10 +64,15 @@ def authentication_status():
 
 
 def sign_out():
-    utils.click_button(r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\checkmark.png', delay=.5)
-    utils.click_button(r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\signout.png')
-    pyautogui.press('enter')
-    print("Signed out of VNC.")
+    while True:
+        open_vnc()
+        checkmark_clicked = utils.click_button(r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\checkmark.png', open_vnc=True)
+        if checkmark_clicked:
+            signout_clicked = utils.click_button(r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\signout.png', open_vnc=True)
+            if signout_clicked:
+                pyautogui.press('enter')
+                print("Signed out of VNC.")
+                return True
 
 
 def create_account_objects():

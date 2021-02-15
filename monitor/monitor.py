@@ -1,3 +1,5 @@
+from time import sleep
+
 import vnc
 import amazon
 import config
@@ -8,7 +10,7 @@ def main():
         # create list of account objects from accounts provided in config.py
         accounts = vnc.create_account_objects()
         # open VNC and get to sign in screen
-        vnc.open_vnc()
+        vnc.open_vnc(delay=.5)
         authenticated = vnc.authentication_status()
         if authenticated:
             vnc.sign_out()
@@ -17,6 +19,7 @@ def main():
             if account.pis_to_open:
                 account.sign_in()
                 account.open_pis()
+                sleep(.6*(len(account.linked_pis)))
                 vnc.sign_out()
         # close main vnc window
         vnc.close_vnc()
