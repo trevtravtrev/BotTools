@@ -19,8 +19,10 @@ def main():
             if account.pis_to_open:
                 account.sign_in()
                 account.open_pis()
-                sleep(.6*(len(account.linked_pis)))
-                vnc.sign_out()
+                # execute this code for every account except the last one
+                sleep(1.75 * (len(account.linked_pis)))
+                if account != accounts[-1]:
+                    vnc.sign_out()
         # close main vnc window
         vnc.close_vnc()
 
