@@ -6,7 +6,7 @@ amazon = False
 amazon_password = "pass"
 
 # list of pi names to open. MUST exact match dictionary keys in vnc_accounts.linked_pis
-pis_to_open = ['pi 1', 'pi 2', 'pi 3', 'pi 4', 'pi 5', 'pi 6', 'pi 7']
+pis_to_open = ['pi 0', 'pi 1', 'pi 2', 'pi 3', 'pi 4', 'pi 5', 'pi 6', 'pi 7']
 
 """
 vnc_accounts (list of dictionaries)
@@ -20,11 +20,10 @@ vnc_accounts = [
     {'username': 'user1',
      'password': 'pass1',
      'linked_pis': {
-         'deallrr': r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\deallrr.png',
+         'pi 0': r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\pi0.png',
          'pi 1': r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\pi1.png',
          'pi 2': r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\pi2.png',
          'pi 3': r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\pi3.png',
-         'pluggrr': r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\pluggrr.png'
      }},
     {'username': 'user2',
      'password': 'pass2',
