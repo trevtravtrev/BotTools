@@ -3,6 +3,7 @@ from time import sleep
 import vnc
 import amazon
 import config
+import twittertoolkit
 
 
 def main():
@@ -25,6 +26,8 @@ def main():
                     vnc.sign_out()
         # close main vnc window
         vnc.close_vnc()
+        twittertoolkit.run_gui()
+        print("Opened Twitter Toolkit.")
 
     if config.amazon:
         # open today's amazon commission earnings (authenticates if not signed in)
