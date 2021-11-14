@@ -3,7 +3,7 @@ import tkinter as tk
 from time import sleep
 
 
-def locate_all_on_screen_and_click(image, wait=0.1, confidence=0.85):
+def locate_all_on_screen_and_click(image, wait=0.05, confidence=0.85):
     # get starting mouse position (when you click a button in the gui)
     mouse_x, mouse_y = pyautogui.position()
     locations = list(pyautogui.locateAllOnScreen(image, confidence=confidence))
@@ -43,6 +43,16 @@ def get_terminals():
     locate_all_on_screen_and_click(image=r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\terminal.png')
 
 
+def get_exit():
+    locate_all_on_screen_and_click(image=r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\exit.png')
+
+
+def get_next_pi():
+    get_home()
+    get_terminals()
+    get_exit()
+
+
 def center_window(window, width, height):
     # get screen width and height
     screen_width = window.winfo_screenwidth()
@@ -55,19 +65,32 @@ def center_window(window, width, height):
 
 
 def run_gui():
+    window_width = 250
+    window_height = 223
+    button_width = 35
+    button_height = 3
     window = tk.Tk()
-    center_window(window, width=250, height=223)
+    center_window(window, width=window_width, height=window_height)
     window.title("Twitter Toolkit")
     window.geometry('250x223')
     buttons = {}
-    options = {"Home": get_home,
+    options = {"Next Pi": get_next_pi,
                "Notifications": get_notifications,
                "Messages": get_messages,
-               "Terminals": get_terminals}
+               "Home": get_home,
+               "Terminals": get_terminals,
+               "Exit Pi": get_exit}
 
-    for option in options.keys():
-        buttons[option] = tk.Button(window, text=option, height=3, width=250, command=options.get(option))
-        buttons[option].pack()
+    for index, option in enumerate(options.keys()):
+        # setup first 3 buttons full row width each vertically
+        if index < 3:
+            buttons[option] = tk.Button(window, text=option, height=button_height, width=button_width, command=options.get(option))
+            buttons[option].pack()
+        # setup bottom 3 buttons 1/3 width each side by side in 1 row
+        else:
+            buttons[option] = tk.Button(window, text=option, height=button_height, width=int(button_width/3), command=options.get(option))
+            buttons[option].pack(side=tk.LEFT)
+
 
     # open app on top of all other windows
     window.attributes('-topmost', True)
