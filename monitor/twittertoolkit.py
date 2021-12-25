@@ -3,7 +3,7 @@ import tkinter as tk
 from time import sleep
 
 
-def locate_all_on_screen_and_click(image, wait=0.05, confidence=0.85):
+def locate_all_on_screen_and_click(image, wait=0.05, confidence=0.9):
     # get starting mouse position (when you click a button in the gui)
     mouse_x, mouse_y = pyautogui.position()
     locations = list(pyautogui.locateAllOnScreen(image, confidence=confidence))
@@ -22,10 +22,12 @@ def locate_all_on_screen_and_click(image, wait=0.05, confidence=0.85):
 
 
 def get_notifications():
-    notifications = locate_all_on_screen_and_click(image=r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\notification.png')
+    notifications = locate_all_on_screen_and_click(
+        image=r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\notification.png')
     # if all notification buttons have already been clicked, click "see more tweets" to scroll to top of notifications
     if not notifications:
-        locate_all_on_screen_and_click(image=r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\notification2.png')
+        locate_all_on_screen_and_click(
+            image=r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\notification2.png')
 
 
 def get_messages():
@@ -36,11 +38,15 @@ def get_home():
     homes = locate_all_on_screen_and_click(image=r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\home.png')
     # if all home buttons have already been clicked, click home buttons again to scroll to top of timelines
     if not homes:
-        locate_all_on_screen_and_click(r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\home2.png', confidence=0.9)
+        locate_all_on_screen_and_click(r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\home2.png', confidence=0.95)
+
+
+def get_refresh():
+    locate_all_on_screen_and_click(image=r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\refresh.png')
 
 
 def get_terminals():
-    locate_all_on_screen_and_click(image=r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\terminal.png')
+    locate_all_on_screen_and_click(image=r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\terminal.png', confidence=0.97)
 
 
 def get_exit():
@@ -49,6 +55,7 @@ def get_exit():
 
 def get_next_pi():
     get_home()
+    get_refresh()
     get_terminals()
     get_exit()
 
@@ -59,8 +66,8 @@ def center_window(window, width, height):
     screen_height = window.winfo_screenheight()
 
     # calculate position x and y coordinates
-    x = (screen_width/2) - (width/2)
-    y = (screen_height/2) - (height/2)
+    x = (screen_width / 2) - (width / 2)
+    y = (screen_height / 2) - (height / 2)
     window.geometry('%dx%d+%d+%d' % (width, height, x, y))
 
 
@@ -77,6 +84,7 @@ def run_gui():
     options = {"Next Pi": get_next_pi,
                "Notifications": get_notifications,
                "Messages": get_messages,
+               "Refresh": get_refresh,
                "Home": get_home,
                "Terminals": get_terminals,
                "Exit Pi": get_exit}
@@ -84,13 +92,14 @@ def run_gui():
     for index, option in enumerate(options.keys()):
         # setup first 3 buttons full row width each vertically
         if index < 3:
-            buttons[option] = tk.Button(window, text=option, height=button_height, width=button_width, command=options.get(option))
+            buttons[option] = tk.Button(window, text=option, height=button_height, width=button_width,
+                                        command=options.get(option))
             buttons[option].pack()
         # setup bottom 3 buttons 1/3 width each side by side in 1 row
         else:
-            buttons[option] = tk.Button(window, text=option, height=button_height, width=int(button_width/3), command=options.get(option))
+            buttons[option] = tk.Button(window, text=option, height=button_height, width=int(button_width / 4),
+                                        command=options.get(option))
             buttons[option].pack(side=tk.LEFT)
-
 
     # open app on top of all other windows
     window.attributes('-topmost', True)
