@@ -22,23 +22,29 @@ def locate_all_on_screen_and_click(image, wait=0.05, confidence=0.9):
 
 
 def get_notifications():
-    notifications = locate_all_on_screen_and_click(
-        image=r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\notification.png')
-    # if all notification buttons have already been clicked, click "see more tweets" to scroll to top of notifications
-    if not notifications:
-        locate_all_on_screen_and_click(
-            image=r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\notification2.png')
+    locate_all_on_screen_and_click(image=r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\notification.png')
+    locate_all_on_screen_and_click(image=r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\notification2.png',
+                                   confidence=0.95)
+
+    locate_all_on_screen_and_click(image=r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\all_bold.png')
+    locate_all_on_screen_and_click(image=r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\all.png')
+    locate_all_on_screen_and_click(image=r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\mentions_bold.png')
+    locate_all_on_screen_and_click(image=r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\mentions.png')
 
 
 def get_messages():
     locate_all_on_screen_and_click(image=r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\message.png')
 
 
-def get_home():
-    homes = locate_all_on_screen_and_click(image=r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\home.png')
-    # if all home buttons have already been clicked, click home buttons again to scroll to top of timelines
-    if not homes:
-        locate_all_on_screen_and_click(r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\home2.png', confidence=0.95)
+# def get_home():
+#     homes = locate_all_on_screen_and_click(image=r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\home.png')
+#     # if all home buttons have already been clicked, click home buttons again to scroll to top of timelines
+#     if not homes:
+#         locate_all_on_screen_and_click(r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\home2.png', confidence=0.95)
+
+def get_default_screen():
+    locate_all_on_screen_and_click(image=r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\notification.png')
+    locate_all_on_screen_and_click(image=r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\mentions.png')
 
 
 def get_refresh():
@@ -46,7 +52,8 @@ def get_refresh():
 
 
 def get_terminals():
-    locate_all_on_screen_and_click(image=r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\terminal.png', confidence=0.97)
+    locate_all_on_screen_and_click(image=r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\terminal.png',
+                                   confidence=0.97)
 
 
 def get_exit():
@@ -54,8 +61,7 @@ def get_exit():
 
 
 def get_next_pi():
-    get_home()
-    get_refresh()
+    get_default_screen()
     get_terminals()
     get_exit()
 
@@ -84,14 +90,14 @@ def run_gui():
     options = {"Next Pi": get_next_pi,
                "Notifications": get_notifications,
                "Messages": get_messages,
+               "Default": get_default_screen,
                "Refresh": get_refresh,
-               "Home": get_home,
                "Terminals": get_terminals,
                "Exit Pi": get_exit}
 
     for index, option in enumerate(options.keys()):
         # setup first 3 buttons full row width each vertically
-        if index < 3:
+        if index <= 2:
             buttons[option] = tk.Button(window, text=option, height=button_height, width=button_width,
                                         command=options.get(option))
             buttons[option].pack()
