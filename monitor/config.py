@@ -8,6 +8,11 @@ amazon_password = "pass"
 # list of pi names to open. MUST exact match dictionary keys in vnc_accounts.linked_pis
 pis_to_open = ['pi 0', 'pi 1', 'pi 2', 'pi 3', 'pi 4', 'pi 5', 'pi 6', 'pi 7']
 
+# crypto addresses that will be generated as buttons that auto copy them to your clipboard
+crypto_addresses = {
+    'btc': '0x0101010101'
+}
+
 """
 vnc_accounts (list of dictionaries)
  - username = vnc account username (string)

@@ -1,6 +1,9 @@
 import pyautogui
 import tkinter as tk
+import pyperclip
+import config
 from time import sleep
+from random import randint, choice
 
 
 def locate_all_on_screen_and_click(image, wait=0.05, confidence=0.9):
@@ -42,7 +45,7 @@ def get_messages():
 #     if not homes:
 #         locate_all_on_screen_and_click(r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\home2.png', confidence=0.95)
 
-def get_default_screen():
+def get_mentions_screen():
     locate_all_on_screen_and_click(image=r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\notification.png')
     locate_all_on_screen_and_click(image=r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\mentions.png')
 
@@ -61,9 +64,29 @@ def get_exit():
 
 
 def get_next_pi():
-    get_default_screen()
+    get_mentions_screen()
     get_terminals()
     get_exit()
+
+
+def copy_reply_text():
+    reply = ["dm'd you", "messaged you", "DM'd you", "Messaged you", "Sent a dm", "sent a dm", "Sent a message",
+             "sent a message"]
+    punctuation = "!"
+    thanks = ["Thank you", "thank you", "Thank you so much", "thank you so much", "tysm", "Tysm", "Omg thank you",
+              "omg thank you", "You just made my entire year", "you just made my entire year", "You are so kind",
+              "you are so kind"]
+    emojis = ['😀', '😃', '😄', '😁', '😊', '😇', '🥰', '😍', '💕', '💌']
+
+    return pyperclip.copy(
+        f'{choice(reply)}{randint(1, 10) * punctuation} {choice(thanks)}{randint(1, 10) * punctuation} {choice(emojis)}')
+
+
+def get_crypto_buttons():
+    crypto_addresses = {}
+    for key, value in config.crypto_addresses.items():
+        crypto_addresses[key] = lambda value=value: pyperclip.copy(value)
+    return crypto_addresses
 
 
 def center_window(window, width, height):
@@ -78,34 +101,48 @@ def center_window(window, width, height):
 
 
 def run_gui():
-    window_width = 250
-    window_height = 223
-    button_width = 35
+    options = {"Next Pi": get_next_pi,
+               "Notifications": get_notifications,
+               "Messages": get_messages,
+               "Mentions": get_mentions_screen,
+               "Refresh": get_refresh,
+               "Terminals": get_terminals,
+               "Exit Pi": get_exit,
+               "Reply": copy_reply_text,
+               }
+    options.update(get_crypto_buttons())
+    buttons = {}
+    window_width = 265
+    window_height = 670
+    button_width = 18
     button_height = 3
     window = tk.Tk()
     center_window(window, width=window_width, height=window_height)
     window.title("Twitter Toolkit")
-    window.geometry('250x223')
-    buttons = {}
-    options = {"Next Pi": get_next_pi,
-               "Notifications": get_notifications,
-               "Messages": get_messages,
-               "Default": get_default_screen,
-               "Refresh": get_refresh,
-               "Terminals": get_terminals,
-               "Exit Pi": get_exit}
+    window.geometry(f'{window_width}x{window_height}')
 
     for index, option in enumerate(options.keys()):
-        # setup first 3 buttons full row width each vertically
-        if index <= 2:
+        if index < 3:
             buttons[option] = tk.Button(window, text=option, height=button_height, width=button_width,
-                                        command=options.get(option))
-            buttons[option].pack()
-        # setup bottom 3 buttons 1/3 width each side by side in 1 row
+                                        command=options.get(option), bg='#FAD7A0').grid(columnspan=2, row=index,
+                                                                                        column=0, sticky='nesw')
+        elif 2 < index < 5:
+            buttons[option] = tk.Button(window, text=option, height=button_height, width=int(button_width),
+                                        command=options.get(option), bg='#CCD1D1').grid(row=3, column=index - 3)
+        elif 4 < index < 7:
+            buttons[option] = tk.Button(window, text=option, height=button_height, width=int(button_width),
+                                        command=options.get(option), bg='#CCD1D1').grid(row=4, column=index - 5)
+        elif index == 7:
+            buttons[option] = tk.Button(window, text=option, height=button_height, width=button_width,
+                                        command=options.get(option), bg='#5499C7').grid(columnspan=2, row=index,
+                                                                                        column=0, sticky='nesw')
         else:
-            buttons[option] = tk.Button(window, text=option, height=button_height, width=int(button_width / 4),
-                                        command=options.get(option))
-            buttons[option].pack(side=tk.LEFT)
+            if index % 2 == 0:
+                buttons[option] = tk.Button(window, text=option, height=button_height, width=button_width,
+                                            command=options.get(option), bg='#ABEBC6').grid(row=index, column=0)
+            else:
+                buttons[option] = tk.Button(window, text=option, height=button_height, width=button_width,
+                                            command=options.get(option), bg='#ABEBC6').grid(row=index - 1, column=1)
 
     # open app on top of all other windows
     window.attributes('-topmost', True)
