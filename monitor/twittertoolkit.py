@@ -31,6 +31,7 @@ def get_notifications():
 
     locate_all_on_screen_and_click(image=r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\all_bold.png')
     locate_all_on_screen_and_click(image=r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\all.png')
+    sleep(5)
     locate_all_on_screen_and_click(image=r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\mentions_bold.png')
     locate_all_on_screen_and_click(image=r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\mentions.png')
 
@@ -69,17 +70,21 @@ def get_next_pi():
     get_exit()
 
 
-def copy_reply_text():
+def copy_reply_text(dm=True):
     reply = ["dm'd you", "messaged you", "DM'd you", "Messaged you", "Sent a dm", "sent a dm", "Sent a message",
              "sent a message"]
     punctuation = "!"
     thanks = ["Thank you", "thank you", "Thank you so much", "thank you so much", "tysm", "Tysm", "Omg thank you",
               "omg thank you", "You just made my entire year", "you just made my entire year", "You are so kind",
               "you are so kind"]
-    emojis = ['😀', '😃', '😄', '😁', '😊', '😇', '🥰', '😍', '💕', '💌']
+    smilies = [':-)', ':)', ':))', ':D', ':-]', ':]', ':^)', ':-))', '']
 
-    return pyperclip.copy(
-        f'{choice(reply)}{randint(1, 10) * punctuation} {choice(thanks)}{randint(1, 10) * punctuation} {choice(emojis)}')
+    if dm:
+        return pyperclip.copy(
+            f'{choice(thanks)}{randint(1, 10) * punctuation} {choice(smilies)}')
+    else:
+        return pyperclip.copy(
+            f'{choice(reply)}{randint(1, 10) * punctuation} {choice(thanks)}{randint(1, 10) * punctuation} {choice(smilies)}')
 
 
 def get_crypto_buttons():
@@ -101,19 +106,21 @@ def center_window(window, width, height):
 
 
 def run_gui():
-    options = {"Next Pi": get_next_pi,
-               "Notifications": get_notifications,
-               "Messages": get_messages,
-               "Mentions": get_mentions_screen,
-               "Refresh": get_refresh,
-               "Terminals": get_terminals,
-               "Exit Pi": get_exit,
-               "Reply": copy_reply_text,
-               }
+    options = {
+        "Next Pi": get_next_pi,
+        "Notifications": get_notifications,
+        "Messages": get_messages,
+        "Mentions": get_mentions_screen,
+        "Refresh": get_refresh,
+        "Terminals": get_terminals,
+        "Exit Pi": get_exit,
+        "DM Reply": lambda: copy_reply_text(dm=True),
+        "Tweet Reply": lambda: copy_reply_text(dm=False)
+    }
     options.update(get_crypto_buttons())
     buttons = {}
     window_width = 265
-    window_height = 670
+    window_height = 727
     button_width = 18
     button_height = 3
     window = tk.Tk()
@@ -132,17 +139,17 @@ def run_gui():
         elif 4 < index < 7:
             buttons[option] = tk.Button(window, text=option, height=button_height, width=int(button_width),
                                         command=options.get(option), bg='#CCD1D1').grid(row=4, column=index - 5)
-        elif index == 7:
+        elif index == 7 or index == 8:
             buttons[option] = tk.Button(window, text=option, height=button_height, width=button_width,
                                         command=options.get(option), bg='#5499C7').grid(columnspan=2, row=index,
                                                                                         column=0, sticky='nesw')
         else:
             if index % 2 == 0:
                 buttons[option] = tk.Button(window, text=option, height=button_height, width=button_width,
-                                            command=options.get(option), bg='#ABEBC6').grid(row=index, column=0)
+                                            command=options.get(option), bg='#ABEBC6').grid(row=index - 1, column=1)
             else:
                 buttons[option] = tk.Button(window, text=option, height=button_height, width=button_width,
-                                            command=options.get(option), bg='#ABEBC6').grid(row=index - 1, column=1)
+                                            command=options.get(option), bg='#ABEBC6').grid(row=index, column=0)
 
     # open app on top of all other windows
     window.attributes('-topmost', True)
