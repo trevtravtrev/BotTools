@@ -70,26 +70,37 @@ def get_next_pi():
     get_exit()
 
 
-def copy_reply_text(dm=True):
-    reply = ["dm'd you", "messaged you", "DM'd you", "Messaged you", "Sent a dm", "sent a dm", "Sent a message",
-             "sent a message"]
+def copy_reply_text(type):
+    tweet_reply = ["dm'd you", "messaged you", "DM'd you", "Messaged you", "Sent a dm", "sent a dm", "Sent a message",
+                   "sent a message"]
+    locked_tweet_reply = ["your dm's are locked so I can't dm you", "your messages are locked so I can't message you",
+                          "your dm's are locked so I can't message you", "your messages are locked so I can't dm you",
+                          "your messages are private so I can't dm you", "your dm's are private so I can't message you",
+                          "your messages are private so I can't message you", "your dm's are private so I can't dm you",
+                          "Your dm's are locked so I can't dm you", "Your messages are locked so I can't message you",
+                          "Your dm's are locked so I can't message you", "Your messages are locked so I can't dm you",
+                          "Your messages are private so I can't dm you", "Your dm's are private so I can't message you",
+                          "Your messages are private so I can't message you", "Your dm's are private so I can't dm you"]
     punctuation = "!"
     thanks = ["Thank you", "thank you", "Thank you so much", "thank you so much", "tysm", "Tysm", "Omg thank you",
               "omg thank you", "You just made my entire year", "you just made my entire year", "You are so kind",
               "you are so kind"]
     smilies = [':-)', ':)', ':))', ':D', ':-]', ':]', ':^)', ':-))', '']
 
-    if dm:
+    if type == "dm":
         return pyperclip.copy(
             f'{choice(thanks)}{randint(1, 10) * punctuation} {choice(smilies)}')
-    else:
+    elif type == "tweet":
         return pyperclip.copy(
-            f'{choice(reply)}{randint(1, 10) * punctuation} {choice(thanks)}{randint(1, 10) * punctuation} {choice(smilies)}')
+            f'{choice(tweet_reply)}{randint(1, 10) * punctuation} {choice(thanks)}{randint(1, 10) * punctuation} {choice(smilies)}')
+    elif type == "locked_tweet":
+        return pyperclip.copy(
+            f'{choice(locked_tweet_reply)}{randint(1, 10) * punctuation} {choice(thanks)}{randint(1, 10) * punctuation} {choice(smilies)}')
 
 
 def get_crypto_buttons():
     crypto_addresses = {}
-    for key, value in config.crypto_addresses.items():
+    for key, value in config.addresses.items():
         crypto_addresses[key] = lambda value=value: pyperclip.copy(value)
     return crypto_addresses
 
@@ -114,13 +125,14 @@ def run_gui():
         "Refresh": get_refresh,
         "Terminals": get_terminals,
         "Exit Pi": get_exit,
-        "DM Reply": lambda: copy_reply_text(dm=True),
-        "Tweet Reply": lambda: copy_reply_text(dm=False)
+        "Locked Tweet Reply": lambda: copy_reply_text(type="locked_tweet"),
+        "Tweet Reply": lambda: copy_reply_text(type="tweet"),
+        "DM Reply": lambda: copy_reply_text(type="dm")
     }
     options.update(get_crypto_buttons())
     buttons = {}
     window_width = 265
-    window_height = 727
+    window_height = 951
     button_width = 18
     button_height = 3
     window = tk.Tk()
@@ -139,17 +151,17 @@ def run_gui():
         elif 4 < index < 7:
             buttons[option] = tk.Button(window, text=option, height=button_height, width=int(button_width),
                                         command=options.get(option), bg='#CCD1D1').grid(row=4, column=index - 5)
-        elif index == 7 or index == 8:
+        elif index == 7 or index == 8 or index == 9:
             buttons[option] = tk.Button(window, text=option, height=button_height, width=button_width,
                                         command=options.get(option), bg='#5499C7').grid(columnspan=2, row=index,
                                                                                         column=0, sticky='nesw')
         else:
             if index % 2 == 0:
                 buttons[option] = tk.Button(window, text=option, height=button_height, width=button_width,
-                                            command=options.get(option), bg='#ABEBC6').grid(row=index - 1, column=1)
+                                            command=options.get(option), bg='#ABEBC6').grid(row=index, column=0)
             else:
                 buttons[option] = tk.Button(window, text=option, height=button_height, width=button_width,
-                                            command=options.get(option), bg='#ABEBC6').grid(row=index, column=0)
+                                            command=options.get(option), bg='#ABEBC6').grid(row=index - 1, column=1)
 
     # open app on top of all other windows
     window.attributes('-topmost', True)
