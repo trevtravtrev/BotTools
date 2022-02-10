@@ -60,9 +60,14 @@ def get_refresh_mentions():
         image=r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\refresh_mentions.png')
 
 
+def get_refresh_messages():
+    locate_all_on_screen_and_click(
+        image=r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\refresh_messages.png')
+
+
 def get_mark_all_as_read():
     locate_all_on_screen_and_click(
-        image=r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\mark_all_as_read.png')
+        image=r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\mark_all_as_read.png', confidence=0.85)
 
 
 def get_refresh():
@@ -74,9 +79,13 @@ def get_exit():
 
 
 def get_next_pi():
-    get_refresh_mentions()
     get_mark_all_as_read()
     get_exit()
+
+
+def get_notifications():
+    get_refresh_mentions()
+    get_refresh_messages()
 
 
 def copy_reply_text(type):
@@ -128,6 +137,7 @@ def center_window(window, width, height):
 def run_gui():
     options = {
         "Next Pi": get_next_pi,
+        "Notifications": get_notifications,
         "Mentions": get_refresh_mentions,
         "Mark All DM's Read": get_mark_all_as_read,
         "Refresh": get_refresh,
@@ -139,7 +149,7 @@ def run_gui():
     options.update(get_crypto_buttons())
     buttons = {}
     window_width = 265
-    window_height = 952
+    window_height = 1008
     button_width = 18
     button_height = 3
     window = tk.Tk()
@@ -148,26 +158,26 @@ def run_gui():
     window.geometry(f'{window_width}x{window_height}')
 
     for index, option in enumerate(options.keys()):
-        if index == 0:
+        if 0 <= index < 2:
             buttons[option] = tk.Button(window, text=option, height=button_height, width=button_width,
                                         command=options.get(option), bg='#FAD7A0').grid(columnspan=2, row=index,
                                                                                         column=0, sticky='nesw')
-        elif 0 < index < 5:
+        elif 1 < index < 6:
             buttons[option] = tk.Button(window, text=option, height=button_height, width=button_width,
                                         command=options.get(option), bg='#CCD1D1').grid(columnspan=2, row=index,
                                                                                         column=0, sticky='nesw')
 
-        elif 4 < index < 8:
+        elif 5 < index < 9:
             buttons[option] = tk.Button(window, text=option, height=button_height, width=button_width,
                                         command=options.get(option), bg='#5499C7').grid(columnspan=2, row=index,
                                                                                         column=0, sticky='nesw')
         else:
             if index % 2 == 0:
                 buttons[option] = tk.Button(window, text=option, height=button_height, width=button_width,
-                                            command=options.get(option), bg='#ABEBC6').grid(row=index, column=0)
+                                            command=options.get(option), bg='#ABEBC6').grid(row=index - 1, column=1)
             else:
                 buttons[option] = tk.Button(window, text=option, height=button_height, width=button_width,
-                                            command=options.get(option), bg='#ABEBC6').grid(row=index - 1, column=1)
+                                            command=options.get(option), bg='#ABEBC6').grid(row=index, column=0)
 
     # open app on top of all other windows
     window.attributes('-topmost', True)
