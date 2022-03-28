@@ -18,7 +18,7 @@ class Account:
 
     def sign_in(self):
         while True:
-            signin_clicked = utils.click_button(r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\signin.png', confidence=.6)
+            signin_clicked = utils.click_button(r'C:\Users\trevo\OneDrive\Documents\GitHub\BotTools\monitor\assets\signin.png', confidence=.6)
             if signin_clicked:
                 pyautogui.write(self.username)
                 pyautogui.press('tab')
@@ -54,7 +54,7 @@ def close_vnc():
 
 
 def authentication_status():
-    signed_out = pyautogui.locateOnScreen(r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\signin.png')
+    signed_out = pyautogui.locateOnScreen(r'C:\Users\trevo\OneDrive\Documents\GitHub\BotTools\monitor\assets\signin.png')
     if signed_out:
         print("VNC is signed out.")
         return False
@@ -66,9 +66,9 @@ def authentication_status():
 def sign_out():
     while True:
         open_vnc()
-        checkmark_clicked = utils.click_button(r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\checkmark.png', open_vnc=True)
+        checkmark_clicked = utils.click_button(r'C:\Users\trevo\OneDrive\Documents\GitHub\BotTools\monitor\assets\checkmark.png', open_vnc=True)
         if checkmark_clicked:
-            signout_clicked = utils.click_button(r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\signout.png', open_vnc=True)
+            signout_clicked = utils.click_button(r'C:\Users\trevo\OneDrive\Documents\GitHub\BotTools\monitor\assets\signout.png', open_vnc=True)
             if signout_clicked:
                 pyautogui.press('enter')
                 print("Signed out of VNC.")

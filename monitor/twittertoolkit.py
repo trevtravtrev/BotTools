@@ -25,57 +25,58 @@ def locate_all_on_screen_and_click(image, wait=0.05, confidence=0.9):
 
 
 # def get_notifications():
-#     locate_all_on_screen_and_click(image=r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\notification.png')
-#     locate_all_on_screen_and_click(image=r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\notification2.png',
+#     locate_all_on_screen_and_click(image=r'C:\Users\trevo\OneDrive\Documents\GitHub\BotTools\monitor\assets\notification.png')
+#     locate_all_on_screen_and_click(image=r'C:\Users\trevo\OneDrive\Documents\GitHub\BotTools\monitor\assets\notification2.png',
 #                                    confidence=0.95)
 #
-#     locate_all_on_screen_and_click(image=r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\all_bold.png')
-#     locate_all_on_screen_and_click(image=r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\all.png')
+#     locate_all_on_screen_and_click(image=r'C:\Users\trevo\OneDrive\Documents\GitHub\BotTools\monitor\assets\all_bold.png')
+#     locate_all_on_screen_and_click(image=r'C:\Users\trevo\OneDrive\Documents\GitHub\BotTools\monitor\assets\all.png')
 #     sleep(5)
-#     locate_all_on_screen_and_click(image=r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\mentions_bold.png')
-#     locate_all_on_screen_and_click(image=r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\mentions.png')
+#     locate_all_on_screen_and_click(image=r'C:\Users\trevo\OneDrive\Documents\GitHub\BotTools\monitor\assets\mentions_bold.png')
+#     locate_all_on_screen_and_click(image=r'C:\Users\trevo\OneDrive\Documents\GitHub\BotTools\monitor\assets\mentions.png')
 
 
 # def get_messages():
-#     locate_all_on_screen_and_click(image=r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\message.png')
+#     locate_all_on_screen_and_click(image=r'C:\Users\trevo\OneDrive\Documents\GitHub\BotTools\monitor\assets\message.png')
 
 
 # def get_home():
-#     homes = locate_all_on_screen_and_click(image=r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\home.png')
+#     homes = locate_all_on_screen_and_click(image=r'C:\Users\trevo\OneDrive\Documents\GitHub\BotTools\monitor\assets\home.png')
 #     # if all home buttons have already been clicked, click home buttons again to scroll to top of timelines
 #     if not homes:
-#         locate_all_on_screen_and_click(r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\home2.png', confidence=0.95)
+#         locate_all_on_screen_and_click(r'C:\Users\trevo\OneDrive\Documents\GitHub\BotTools\monitor\assets\home2.png', confidence=0.95)
 
 # def get_mentions_screen():
-#     locate_all_on_screen_and_click(image=r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\notification.png')
-#     locate_all_on_screen_and_click(image=r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\mentions.png')
+#     locate_all_on_screen_and_click(image=r'C:\Users\trevo\OneDrive\Documents\GitHub\BotTools\monitor\assets\notification.png')
+#     locate_all_on_screen_and_click(image=r'C:\Users\trevo\OneDrive\Documents\GitHub\BotTools\monitor\assets\mentions.png')
 
 
 # def get_terminals():
-#     locate_all_on_screen_and_click(image=r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\terminal.png',
+#     locate_all_on_screen_and_click(image=r'C:\Users\trevo\OneDrive\Documents\GitHub\BotTools\monitor\assets\terminal.png',
 #                                    confidence=0.97)
 
 def get_refresh_mentions():
     locate_all_on_screen_and_click(
-        image=r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\refresh_mentions.png')
+        image=r'C:\Users\trevo\OneDrive\Documents\GitHub\BotTools\monitor\assets\refresh_mentions.png')
 
 
 def get_refresh_messages():
     locate_all_on_screen_and_click(
-        image=r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\refresh_messages.png')
+        image=r'C:\Users\trevo\OneDrive\Documents\GitHub\BotTools\monitor\assets\refresh_messages.png')
 
 
 def get_mark_all_as_read():
     locate_all_on_screen_and_click(
-        image=r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\mark_all_as_read.png', confidence=0.85)
+        image=r'C:\Users\trevo\OneDrive\Documents\GitHub\BotTools\monitor\assets\mark_all_as_read.png', confidence=0.85)
 
 
 def get_refresh():
-    locate_all_on_screen_and_click(image=r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\refresh.png')
+    locate_all_on_screen_and_click(
+        image=r'C:\Users\trevo\OneDrive\Documents\GitHub\BotTools\monitor\assets\refresh.png')
 
 
 def get_exit():
-    locate_all_on_screen_and_click(image=r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\exit.png')
+    locate_all_on_screen_and_click(image=r'C:\Users\trevo\OneDrive\Documents\GitHub\BotTools\monitor\assets\exit.png')
 
 
 def get_next_pi():

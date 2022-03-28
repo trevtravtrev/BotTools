@@ -15,17 +15,17 @@ def open_amazon_affiliate_webpage(website, delay=1):
 
 def view_commissions():
     try:
-        utils.click_button(r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\commissions.png')
+        utils.click_button(r'C:\Users\trevo\OneDrive\Documents\GitHub\BotTools\monitor\assets\commissions.png')
     except:
-        utils.click_button(r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\commissions2.png')
+        utils.click_button(r'C:\Users\trevo\OneDrive\Documents\GitHub\BotTools\monitor\assets\commissions2.png')
     print("Commission view selected.")
 
 
 def view_bounties():
     try:
-        utils.click_button(r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\bounties.png')
+        utils.click_button(r'C:\Users\trevo\OneDrive\Documents\GitHub\BotTools\monitor\assets\bounties.png')
     except:
-        utils.click_button(r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\bounties2.png')
+        utils.click_button(r'C:\Users\trevo\OneDrive\Documents\GitHub\BotTools\monitor\assets\bounties2.png')
     print("Bounty view selected.")
 
 
@@ -36,7 +36,7 @@ def _open_website(website, delay=1):
 
 
 def _authentication_status():
-    signed_out = pyautogui.locateOnScreen(r'C:\Users\trevo\Documents\GitHub\BotTools\monitor\assets\amazonsignin.png')
+    signed_out = pyautogui.locateOnScreen(r'C:\Users\trevo\OneDrive\Documents\GitHub\BotTools\monitor\assets\amazonsignin.png')
     if signed_out:
         print("Amazon is signed out.")
         return False
